@@ -1,9 +1,11 @@
 package main
 
 import (
-	"github.com/cilium/customvet/analysis"
+	"github.com/cilium/customvet/analysis/timeafter"
 
-	"golang.org/x/tools/go/analysis/singlechecker"
+	"golang.org/x/tools/go/analysis/multichecker"
 )
 
-func main() { singlechecker.Main(analysis.Analyzer) }
+func main() {
+	multichecker.Main(timeafter.Analyzer)
+}
