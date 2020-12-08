@@ -1,0 +1,51 @@
+name: Pull Request Validation
+
+on:
+  pull_request: {}
+  push:
+    branches:
+      - master
+
+jobs:
+  go-mod:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Go
+        uses: actions/setup-go@v1
+        with:
+          go-version: 1.15.6
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Check module vendoring
+        run: |
+          go mod tidy
+          go mod vendor
+          git diff --exit-code
+
+  build:
+    runs-on: ubuntu-latest
+    needs: go-mod
+    steps:
+      - name: Install Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.15.6
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Go code prechecks
+        run: |
+          go build ./...
+
+  unit-test:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Install Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.15.6
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Go code prechecks
+        run: |
+          go test ./...
