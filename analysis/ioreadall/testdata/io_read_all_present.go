@@ -22,10 +22,10 @@ import (
 
 func IOReadAllPresent() {
 	r := strings.NewReader("this is a string reader")
-	io.ReadAll(r) // want `use of io.ReadAll is prohibited, use bufio.NewReaderSize instead`
+	io.ReadAll(r) // want `use of io.ReadAll is prohibited, use safeio.ReadAllLimit instead`
 }
 
 func IOUtilReadAllPresent() {
 	r := strings.NewReader("this is a string reader")
-	ioutil.ReadAll(r) // want `use of ioutil.ReadAll is prohibited, use bufio.NewReaderSize instead`
+	ioutil.ReadAll(r) // want `use of ioutil.ReadAll is prohibited, use safeio.ReadAllLimit instead`
 }
