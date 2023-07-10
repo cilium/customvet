@@ -1,3 +1,6 @@
+> **Note**
+> This repository is deprecated. See https://github.com/cilium/linters instead.
+
 CustomVet
 =========
 CustomVet is a simple vet analysis tool that allows the Cilium
